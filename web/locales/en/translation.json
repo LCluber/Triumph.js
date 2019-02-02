@@ -1,0 +1,42 @@
+{
+  "title": "Triumph.js",
+  "menu" : {
+    "menu"          : "Menu",
+    "home"          : "Home",
+    "about"         : "About",
+    "example"       : "Example",
+    "code"          : "Code",
+    "download"      : "Download",
+    "documentation" : "Documentation",
+    "contact"       : "Contact"
+  },
+  "section" : {
+    "home" : {
+      "h1" : "Triumph.js",
+      "description" : "An open source achievements and rewards library written in TypeScript."
+    },
+    "about" : {
+      "h2" : "About",
+      "text" : "<p>The purpose of this library is to provide a simple way to implement achievements and rewards in your app.</p><p> You can help develop Triumph.js on <a href=\"https://github.com/LCluber/Triumph.js\" target=\"_blank\">Github</a>.</p>"
+    },
+    "code" : {
+      "h2" : "Code",
+      "h3" : "Javascript (main.js)",
+      "p1" : "Instantiate a Keyboard class and creates input listeners."
+    },
+    "download" : {
+      "h2" : "Download Triumph.js",
+      "min" : "Standalone IIFE",
+      "npm" : "Install with ",
+      "zip" : "Triumphjs.zip",
+      "github" : "Clone from Github "
+    },
+    "contact" : {
+      "h2" : "Contact me",
+      "description" : "Feel free to ask me about my work, give me suggestions, or just to say hi.",
+      "website" : "lcluber.com"
+    }
+  },
+  "github":" Github",
+  "twitter":"Twitter"
+}
