@@ -44,6 +44,9 @@ ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 
 ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achievement with a timestamp
 ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement
 
+// Check if reward is earned
+let reward = REWARDS.get('dbg').isActive();
+
 // Export flat array for easy persistence
 let userAchvs = ACHIEVEMENTS.export();
 
@@ -86,6 +89,9 @@ ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 
 // activate achievements.
 ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achievement with a timestamp
 ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement
+
+// Check if reward is earned
+var reward = REWARDS.get('dbg').isActive();
 
 // Export flat array for easy persistence
 var userAchvs = ACHIEVEMENTS.export();
