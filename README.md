@@ -26,14 +26,14 @@ REWARDS.add('emp', 'EMP Boost', 'EMP are 20% bigger','bomb');
 
 ACHIEVEMENTS = new Achievements();
 
-var subAchv = new Achievements();
+let subAchv = new Achievements();
 subAchv.add( "a", "Score novice", "Score 1 000 000 points", 1000000, null, 'crown', null);
 subAchv.add( "b", "Score hobbyist", "Score 10 000 000 points", 10000000, null, 'crown', null);
 subAchv.add( "c", "Score adventurer", "Score 20 000 000 points", 20000000, null, 'crown', REWARDS.get('emp'));
 
 ACHIEVEMENTS.add("pgm", "PGM", "Make high scores", 0, subAchv, 'crown', null);
 
-subAchv2 = new Achievements();
+let subAchv2 = new Achievements();
 subAchv2.add( "a", "Survivor novice", "Survive 1 minute", 1, null, 'heartbeat', null);
 subAchv2.add( "b", "Survivor hobbyist", "Survive 2 minutes", 2, null, 'heartbeat', null);
 subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbeat', REWARDS.get('dbg');
@@ -41,11 +41,11 @@ subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbe
 ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 'heartbeat', null);
 
 // activate achievements.
-ACHIEVEMENTS.try("svv", 1, 1287507239);
-ACHIEVEMENTS.try("svv", 3, null);
+ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achievement with a timestamp
+ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement
 
-// Export for persistence
-var userAchvs = ACHIEVEMENTS.export();
+// Export flat array for easy persistence
+let userAchvs = ACHIEVEMENTS.export();
 
 // Update achievements with previous Export
 userAchvs.forEach(function(uAchv) {
@@ -76,7 +76,7 @@ subAchv.add( "c", "Score adventurer", "Score 20 000 000 points", 20000000, null,
 
 ACHIEVEMENTS.add("pgm", "PGM", "Make high scores", 0, subAchv, 'crown', null);
 
-subAchv2 = new Triumph.Achievements();
+var subAchv2 = new Triumph.Achievements();
 subAchv2.add( "a", "Survivor novice", "Survive 1 minute", 1, null, 'heartbeat', null);
 subAchv2.add( "b", "Survivor hobbyist", "Survive 2 minutes", 2, null, 'heartbeat', null);
 subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbeat', REWARDS.get('dbg');
@@ -84,10 +84,10 @@ subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbe
 ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 'heartbeat', null);
 
 // activate achievements.
-ACHIEVEMENTS.try("svv", 1, 1287507239);
-ACHIEVEMENTS.try("svv", 3, null);
+ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achievement with a timestamp
+ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement
 
-// Export for persistence
+// Export flat array for easy persistence
 var userAchvs = ACHIEVEMENTS.export();
 
 // Update achievements with previous Export
@@ -101,7 +101,7 @@ userAchvs.forEach(function(uAchv) {
 
 ## Demo
 
-See a basic example **[here](http://triumphjs.lcluber.com/#example)**.
+See an example on this awesome game **[here](http://vortalcombat.roostrjs.com)**.
 
 ## API Reference
 
