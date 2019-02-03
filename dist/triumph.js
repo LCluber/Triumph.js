@@ -50,19 +50,28 @@ class Achievement {
         if (!this.isActive()) {
             if (this.children.length()) {
                 let childrenPoints = this.children.score.points;
-                this.children.try(null, value, timestamp);
+                let message = this.children.try(null, value, timestamp);
                 if (this.children.progress === 100) {
-                    return this.activate(timestamp);
+                    return {
+                        message: message,
+                        points: this.activate(timestamp)
+                    };
                 }
                 else if (this.children.score.points > childrenPoints) {
-                    return this.children.score.points - childrenPoints;
+                    return {
+                        message: message,
+                        points: this.children.score.points - childrenPoints
+                    };
                 }
             }
             else if (this.value <= value) {
-                return this.activate(timestamp);
+                return {
+                    message: this.title,
+                    points: this.activate(timestamp)
+                };
             }
         }
-        return 0;
+        return false;
     }
     export(name) {
         name = name ? name : this.name;
@@ -130,19 +139,24 @@ class Achievements {
         return this.list.length;
     }
     try(name, value, timestamp) {
+        let lastMessage = null;
         if (this.progress < 100) {
             if (name) {
                 let achv = this.get(name);
                 if (achv) {
-                    this.test(achv, value, timestamp);
+                    lastMessage = this.test(achv, value, timestamp);
                 }
             }
             else {
                 for (let achv of this.list) {
-                    this.test(achv, value, timestamp);
+                    let msg = this.test(achv, value, timestamp);
+                    if (msg) {
+                        lastMessage = msg;
+                    }
                 }
             }
         }
+        return lastMessage;
     }
     export(name) {
         let achvs = [];
@@ -158,12 +172,12 @@ class Achievements {
         return false;
     }
     test(achievement, value, timestamp) {
-        let newPoints = achievement.try(value, timestamp);
-        if (newPoints) {
-            this.progress = this.score.updateProgress(newPoints);
-            return true;
+        let achv = achievement.try(value, timestamp);
+        if (achv && achv.points) {
+            this.progress = this.score.updateProgress(achv.points);
+            return achv.message;
         }
-        return false;
+        return null;
     }
 }
 

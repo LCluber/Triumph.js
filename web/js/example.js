@@ -18,8 +18,8 @@ subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbe
 
 ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 'heartbeat', REWARDS.get('dbg'));
 
-ACHIEVEMENTS.try("svv", 1, 1549105106266);
-ACHIEVEMENTS.try("svv", 3, null);
-console.log(ACHIEVEMENTS.export());
-console.log(ACHIEVEMENTS);
-console.log(REWARDS);
+console.log(ACHIEVEMENTS.try("svv", 1, 1549105106266));
+console.log(ACHIEVEMENTS.try("svv", 3, null));
+// console.log(ACHIEVEMENTS.export());
+// console.log(ACHIEVEMENTS);
+// console.log(REWARDS);

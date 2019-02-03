@@ -24,6 +24,10 @@
 */
 
 
+export declare type Achv = {
+    message: string;
+    points: number;
+};
 export declare class Achievement {
     name: string;
     title: string;
@@ -36,7 +40,7 @@ export declare class Achievement {
     constructor(name: string, title: string, description: string, value: number, children: Achievements, image: string, reward: Reward);
     isActive(): boolean;
     private activate;
-    try(value: number, timestamp: number): number;
+    try(value: number, timestamp: number): Achv | false;
     export(name: string): Array<Pick<Achievement, 'name' | 'value' | 'date'>> | false;
 }
 
@@ -53,7 +57,7 @@ export declare class Achievements {
     getTotalPoints(): number;
     get(name: string): Achievement | false;
     length(): number;
-    try(name: string, value: number, timestamp: number): void;
+    try(name: string, value: number, timestamp: number): string;
     export(name: string): Array<Pick<Achievement, 'name' | 'value' | 'date'>> | false;
     private test;
 }

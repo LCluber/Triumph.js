@@ -223,19 +223,28 @@ var Triumph = (function (exports) {
       if (!this.isActive()) {
         if (this.children.length()) {
           var childrenPoints = this.children.score.points;
-          this.children.try(null, value, timestamp);
+          var message = this.children.try(null, value, timestamp);
 
           if (this.children.progress === 100) {
-            return this.activate(timestamp);
+            return {
+              message: message,
+              points: this.activate(timestamp)
+            };
           } else if (this.children.score.points > childrenPoints) {
-            return this.children.score.points - childrenPoints;
+            return {
+              message: message,
+              points: this.children.score.points - childrenPoints
+            };
           }
         } else if (this.value <= value) {
-          return this.activate(timestamp);
+          return {
+            message: this.title,
+            points: this.activate(timestamp)
+          };
         }
       }
 
-      return 0;
+      return false;
     };
 
     _proto.export = function _export(name) {
@@ -342,12 +351,14 @@ var Triumph = (function (exports) {
     };
 
     _proto.try = function _try(name, value, timestamp) {
+      var lastMessage = null;
+
       if (this.progress < 100) {
         if (name) {
           var achv = this.get(name);
 
           if (achv) {
-            this.test(achv, value, timestamp);
+            lastMessage = this.test(achv, value, timestamp);
           }
         } else {
           for (var _iterator2 = this.list, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
@@ -363,10 +374,16 @@ var Triumph = (function (exports) {
             }
 
             var _achv = _ref2;
-            this.test(_achv, value, timestamp);
+            var msg = this.test(_achv, value, timestamp);
+
+            if (msg) {
+              lastMessage = msg;
+            }
           }
         }
       }
+
+      return lastMessage;
     };
 
     _proto.export = function _export(name) {
@@ -400,14 +417,14 @@ var Triumph = (function (exports) {
     };
 
     _proto.test = function test(achievement, value, timestamp) {
-      var newPoints = achievement.try(value, timestamp);
+      var achv = achievement.try(value, timestamp);
 
-      if (newPoints) {
-        this.progress = this.score.updateProgress(newPoints);
-        return true;
+      if (achv && achv.points) {
+        this.progress = this.score.updateProgress(achv.points);
+        return achv.message;
       }
 
-      return false;
+      return null;
     };
 
     return Achievements;

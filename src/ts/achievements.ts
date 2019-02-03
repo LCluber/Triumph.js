@@ -69,20 +69,24 @@ export class Achievements {
   //   return achv ? achv : false;
   // }
 
-  public try(name: string, value: number, timestamp: number): void {
+  public try(name: string, value: number, timestamp: number): string {
+    let lastMessage = null;
     if (this.progress < 100) {
       if (name) {
         let achv = this.get(name);
         if (achv) {
-          this.test(achv, value, timestamp);
+          lastMessage = this.test(achv, value, timestamp);
         }
       } else {
         for(let achv of this.list) {
-          this.test(achv, value, timestamp);
+          let msg = this.test(achv, value, timestamp);
+          if (msg){
+            lastMessage = msg;
+          }
         }
       }
     }
-    //return this.progress;
+    return lastMessage;
   }
 
   public export(name:string): Array<Pick<Achievement, 'name' | 'value' | 'date'>>|false {
@@ -99,13 +103,13 @@ export class Achievements {
     return false;
   }
 
-  private test(achievement: Achievement, value: number, timestamp: number): boolean {
-    let newPoints = achievement.try(value, timestamp);
-    if (newPoints) {
-      this.progress = this.score.updateProgress(newPoints);
-      return true;
+  private test(achievement: Achievement, value: number, timestamp: number): string {
+    let achv = achievement.try(value, timestamp);
+    if (achv && achv.points) {
+      this.progress = this.score.updateProgress(achv.points);
+      return achv.message;
     }
-    return false;
+    return null;
   }
 
 

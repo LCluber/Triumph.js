@@ -96,10 +96,13 @@ subAchv2.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"S
 ACHIEVEMENTS.add(<span class="hljs-string">"svv"</span>, <span class="hljs-string">"Immortal"</span>, <span class="hljs-string">"Survive as long as possible"</span>, <span class="hljs-number">0</span>, subAchv2, <span class="hljs-string">'heartbeat'</span>, <span class="hljs-literal">null</span>);
 
 <span class="hljs-comment">// activate achievements.</span>
-ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1287507239</span>);
-ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>);
+ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1549104204008</span>); <span class="hljs-comment">// Activate a previously earned achievement with a timestamp</span>
+ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>); <span class="hljs-comment">// Activate a freshly earned achievement</span>
 
-<span class="hljs-comment">// Export for persistence</span>
+<span class="hljs-comment">// Check if reward is earned</span>
+<span class="hljs-keyword">let</span> reward = REWARDS.get(<span class="hljs-string">'dbg'</span>).isActive();
+
+<span class="hljs-comment">// Export flat array for easy persistence</span>
 <span class="hljs-keyword">let</span> userAchvs = ACHIEVEMENTS.export();
 
 <span class="hljs-comment">// Update achievements with previous Export</span>
@@ -132,10 +135,13 @@ subAchv2.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"S
 ACHIEVEMENTS.add(<span class="hljs-string">"svv"</span>, <span class="hljs-string">"Immortal"</span>, <span class="hljs-string">"Survive as long as possible"</span>, <span class="hljs-number">0</span>, subAchv2, <span class="hljs-string">'heartbeat'</span>, <span class="hljs-literal">null</span>);
 
 <span class="hljs-comment">// activate achievements.</span>
-ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1287507239</span>);
-ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>);
+ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1549104204008</span>); <span class="hljs-comment">// Activate a previously earned achievement with a timestamp</span>
+ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>); <span class="hljs-comment">// Activate a freshly earned achievement</span>
 
-<span class="hljs-comment">// Export for persistence</span>
+<span class="hljs-comment">// Check if reward is earned</span>
+<span class="hljs-keyword">var</span> reward = REWARDS.get(<span class="hljs-string">'dbg'</span>).isActive();
+
+<span class="hljs-comment">// Export flat array for easy persistence</span>
 <span class="hljs-keyword">var</span> userAchvs = ACHIEVEMENTS.export();
 
 <span class="hljs-comment">// Update achievements with previous Export</span>
