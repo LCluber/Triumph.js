@@ -1,6 +1,6 @@
-Version 0.1.1 (February 03st 2019)
+Version 0.1.1 (February 03rd 2019)
 -----------------------------
- * Try method of Achievements class returns a message
+ * Try() method of Achievements class returns the title of the biggest earned achievement
 
 Version 0.1.0 (February 01st 2019)
 -----------------------------
