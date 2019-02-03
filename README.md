@@ -42,7 +42,7 @@ ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 
 
 // activate achievements.
 ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achievement with a timestamp
-ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement
+let msg = ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement and return the title of the biggest achievement earned
 
 // Check if reward is earned
 let reward = REWARDS.get('dbg').isActive();
@@ -88,7 +88,7 @@ ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 
 
 // activate achievements.
 ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achievement with a timestamp
-ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement
+var msg = ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement and return the title of the biggest achievement earned
 
 // Check if reward is earned
 var reward = REWARDS.get('dbg').isActive();
