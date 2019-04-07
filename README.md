@@ -129,7 +129,7 @@ Achievements.add( name: string,
                 ): boolean {}
 Achievements.try(name: string, value: number, timestamp: number): string {}
 Achievements.export(name:string): Array<Pick<Achievement, 'name' | 'value' | 'date'>>|false {}
-Achievements.get(name: string): Achievement|null {}
+Achievements.get(name: string): Achievement | null {}
 Achievements.getPoints(): number {}
 Achievements.getTotalPoints(): number {}
 Achievements.length(): number {}
@@ -139,7 +139,7 @@ Rewards.add(  name: string,
               description: string,
               image: string
             ): boolean {}
-Rewards.get(name: string): Reward|null {}
+Rewards.get(name: string): Reward | null {}
 Rewards.length(): number {}
 ```
 
