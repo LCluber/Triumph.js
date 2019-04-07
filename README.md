@@ -1,6 +1,6 @@
 ## Synopsis
 
-[Triumph.js](http://triumphjs.lcluber.com) is an open source achievements and rewards library written in TypeScript.
+Triumph.js is an open source achievements and rewards library written in TypeScript.
 
 ## Motivation
 
@@ -8,10 +8,17 @@ The purpose of this library is to provide a simple way to implement achievements
 
 ## Installation
 
+### NPM
+
 ```bash
 $ npm install @lcluber/triumphjs
 ```
-Or download it **[here](http://triumphjs.lcluber.com/#download)**.
+
+### Yarn
+
+```bash
+$ yarn add @lcluber/triumphjs
+```
 
 ## Usage
 
@@ -42,7 +49,7 @@ ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 
 
 // activate achievements.
 ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achievement with a timestamp
-let msg = ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement and return the title of the biggest achievement earned
+let msg = ACHIEVEMENTS.try("svv", 3, null); // Test achievement "svv" with the value "3" and return the title of the biggest level earned with this value.
 
 // Check if reward is earned
 let reward = REWARDS.get('dbg').isActive();
@@ -88,7 +95,7 @@ ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 
 
 // activate achievements.
 ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achievement with a timestamp
-var msg = ACHIEVEMENTS.try("svv", 3, null); // Activate a freshly earned achievement and return the title of the biggest achievement earned
+var msg = ACHIEVEMENTS.try("svv", 3, null); // Test achievement "svv" with the value "3" and return the title of the biggest level earned with this value.
 
 // Check if reward is earned
 var reward = REWARDS.get('dbg').isActive();
@@ -107,11 +114,34 @@ userAchvs.forEach(function(uAchv) {
 
 ## Demo
 
-See an example on this awesome game **[here](http://vortalcombat.roostrjs.com)**.
+See an example on **[this awesome game](http://vortalcombat.roostrjs.com)**.
 
 ## API Reference
 
-Read the documentation **[here](http://triumphjs.lcluber.com/doc/)**.
+```javascript
+Achievements.add( name: string,
+                  title: string,
+                  description: string,
+                  value: number,
+                  children: Achievements | null,
+                  image: string,
+                  reward: Reward
+                ): boolean {}
+Achievements.try(name: string, value: number, timestamp: number): string {}
+Achievements.export(name:string): Array<Pick<Achievement, 'name' | 'value' | 'date'>>|false {}
+Achievements.get(name: string): Achievement | null {}
+Achievements.getPoints(): number {}
+Achievements.getTotalPoints(): number {}
+Achievements.length(): number {}
+
+Rewards.add(  name: string,
+              title: String,
+              description: string,
+              image: string
+            ): boolean {}
+Rewards.get(name: string): Reward | null {}
+Rewards.length(): number {}
+```
 
 ## Tests
 

@@ -55,7 +55,7 @@ export declare class Achievements {
     add(name: string, title: string, description: string, value: number, children: Achievements | null, image: string, reward: Reward): boolean;
     getPoints(): number;
     getTotalPoints(): number;
-    get(name: string): Achievement | false;
+    get(name: string): Achievement | null;
     length(): number;
     try(name: string, value: number, timestamp: number): string;
     export(name: string): Array<Pick<Achievement, 'name' | 'value' | 'date'>> | false;
@@ -82,7 +82,7 @@ export declare class Rewards {
     list: Array<Reward>;
     constructor();
     add(name: string, title: String, description: string, image: string): boolean;
-    get(name: string): Reward | false;
+    get(name: string): Reward | null;
     length(): number;
 }
 export declare class Score {

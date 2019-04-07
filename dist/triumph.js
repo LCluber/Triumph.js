@@ -133,7 +133,7 @@ class Achievements {
                 return achievement;
             }
         }
-        return false;
+        return null;
     }
     length() {
         return this.list.length;
@@ -219,7 +219,7 @@ class Rewards {
                 return reward;
             }
         }
-        return false;
+        return null;
     }
     length() {
         return this.list.length;

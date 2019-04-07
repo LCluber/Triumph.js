@@ -46,16 +46,16 @@ export class Achievements {
     return this.score.total;
   }
 
-  public get(name: string): Achievement|false {
+  public get(name: string): Achievement|null {
     for (let achievement of this.list) {
       if (achievement.name === name) {
         return achievement;
       }
     }
-    return false;
+    return null;
   }
 
-  public length(){
+  public length(): number {
     return this.list.length;
   }
 
