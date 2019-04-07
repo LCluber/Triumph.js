@@ -65,12 +65,14 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h2 id="synopsis">Synopsis</h2>
-				<p><a href="http://triumphjs.lcluber.com">Triumph.js</a> is an open source achievements and rewards library written in TypeScript.</p>
+				<p>Triumph.js is an open source achievements and rewards library written in TypeScript.</p>
 				<h2 id="motivation">Motivation</h2>
 				<p>The purpose of this library is to provide a simple way to implement achievements and rewards in your app.</p>
 				<h2 id="installation">Installation</h2>
+				<h3 id="npm">NPM</h3>
 				<pre><code class="language-bash">$ npm install @lcluber/triumphjs</code></pre>
-				<p>Or download it <strong><a href="http://triumphjs.lcluber.com/#download">here</a></strong>.</p>
+				<h3 id="yarn">Yarn</h3>
+				<pre><code class="language-bash">$ yarn add @lcluber/triumphjs</code></pre>
 				<h2 id="usage">Usage</h2>
 				<h3 id="es6">ES6</h3>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { Achievements, Rewards } <span class="hljs-keyword">from</span> <span class="hljs-string">'@lcluber/triumphjs'</span>;
@@ -97,7 +99,7 @@ ACHIEVEMENTS.add(<span class="hljs-string">"svv"</span>, <span class="hljs-strin
 
 <span class="hljs-comment">// activate achievements.</span>
 ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1549104204008</span>); <span class="hljs-comment">// Activate a previously earned achievement with a timestamp</span>
-ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>); <span class="hljs-comment">// Activate a freshly earned achievement</span>
+<span class="hljs-keyword">let</span> msg = ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>); <span class="hljs-comment">// Test achievement "svv" with the value "3" and return the title of the biggest level earned with this value.</span>
 
 <span class="hljs-comment">// Check if reward is earned</span>
 <span class="hljs-keyword">let</span> reward = REWARDS.get(<span class="hljs-string">'dbg'</span>).isActive();
@@ -136,7 +138,7 @@ ACHIEVEMENTS.add(<span class="hljs-string">"svv"</span>, <span class="hljs-strin
 
 <span class="hljs-comment">// activate achievements.</span>
 ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1549104204008</span>); <span class="hljs-comment">// Activate a previously earned achievement with a timestamp</span>
-ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>); <span class="hljs-comment">// Activate a freshly earned achievement</span>
+<span class="hljs-keyword">var</span> msg = ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>); <span class="hljs-comment">// Test achievement "svv" with the value "3" and return the title of the biggest level earned with this value.</span>
 
 <span class="hljs-comment">// Check if reward is earned</span>
 <span class="hljs-keyword">var</span> reward = REWARDS.get(<span class="hljs-string">'dbg'</span>).isActive();
@@ -152,9 +154,30 @@ userAchvs.forEach(<span class="hljs-function"><span class="hljs-keyword">functio
 });
 </code></pre>
 				<h2 id="demo">Demo</h2>
-				<p>See an example on this awesome game <strong><a href="http://vortalcombat.roostrjs.com">here</a></strong>.</p>
+				<p>See an example on <strong><a href="http://vortalcombat.roostrjs.com">this awesome game</a></strong>.</p>
 				<h2 id="api-reference">API Reference</h2>
-				<p>Read the documentation <strong><a href="http://triumphjs.lcluber.com/doc/">here</a></strong>.</p>
+				<pre><code class="language-javascript">Achievements.add( name: string,
+                  <span class="hljs-attr">title</span>: string,
+                  <span class="hljs-attr">description</span>: string,
+                  <span class="hljs-attr">value</span>: number,
+                  <span class="hljs-attr">children</span>: Achievements | <span class="hljs-literal">null</span>,
+                  <span class="hljs-attr">image</span>: string,
+                  <span class="hljs-attr">reward</span>: Reward
+                ): boolean {}
+Achievements.try(name: string, <span class="hljs-attr">value</span>: number, <span class="hljs-attr">timestamp</span>: number): string {}
+Achievements.export(name:string): <span class="hljs-built_in">Array</span>&lt;Pick&lt;Achievement, <span class="hljs-string">'name'</span> | <span class="hljs-string">'value'</span> | <span class="hljs-string">'date'</span>&gt;&gt;|<span class="hljs-literal">false</span> {}
+Achievements.get(name: string): Achievement|<span class="hljs-literal">null</span> {}
+Achievements.getPoints(): number {}
+Achievements.getTotalPoints(): number {}
+Achievements.length(): number {}
+
+Rewards.add(  name: string,
+              <span class="hljs-attr">title</span>: <span class="hljs-built_in">String</span>,
+              <span class="hljs-attr">description</span>: string,
+              <span class="hljs-attr">image</span>: string
+            ): boolean {}
+Rewards.get(name: string): Reward|<span class="hljs-literal">null</span> {}
+Rewards.length(): number {}</code></pre>
 				<h2 id="tests">Tests</h2>
 				<p>No tests to run yet</p>
 				<h2 id="contributors">Contributors</h2>

@@ -31,16 +31,16 @@ export class Rewards {
     return false;
   }
 
-  public get(name: string): Reward|false {
+  public get(name: string): Reward|null {
     for (let reward of this.list) {
       if (reward.name === name) {
         return reward;
       }
     }
-    return false;
+    return null;
   }
 
-  public length(){
+  public length(): number {
     return this.list.length;
   }
 

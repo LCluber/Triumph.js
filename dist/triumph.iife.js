@@ -106,8 +106,8 @@ var Triumph = (function (exports) {
     };
 
     _proto.findLevel = function findLevel(name) {
-      for (var _i = 0; _i < LEVELS.length; _i++) {
-        var level = LEVELS[_i];
+      for (var _i = 0, _LEVELS = LEVELS; _i < _LEVELS.length; _i++) {
+        var level = _LEVELS[_i];
 
         if (level.name === name) {
           return level;
@@ -160,8 +160,8 @@ var Triumph = (function (exports) {
     };
 
     Logger.findLevel = function findLevel(name) {
-      for (var _i2 = 0; _i2 < LEVELS.length; _i2++) {
-        var level = LEVELS[_i2];
+      for (var _i2 = 0, _LEVELS2 = LEVELS; _i2 < _LEVELS2.length; _i2++) {
+        var level = _LEVELS2[_i2];
 
         if (level.name === name) {
           return level;
@@ -343,7 +343,7 @@ var Triumph = (function (exports) {
         }
       }
 
-      return false;
+      return null;
     };
 
     _proto.length = function length() {
@@ -498,7 +498,7 @@ var Triumph = (function (exports) {
         }
       }
 
-      return false;
+      return null;
     };
 
     _proto.length = function length() {
