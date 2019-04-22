@@ -228,7 +228,7 @@ class Rewards {
     }
     getByGroup(group) {
         let list = this.list.filter(reward => reward.group === group);
-        if (!list) {
+        if (!list.length) {
             return null;
         }
         const reducer = (previousReward, currentReward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
@@ -243,7 +243,7 @@ class Rewards {
     }
     isGroupActive(group) {
         let list = this.list.filter(reward => reward.group === group);
-        if (!list) {
+        if (!list.length) {
             return null;
         }
         const reducer = (previousReward, currentReward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;

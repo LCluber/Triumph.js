@@ -505,7 +505,7 @@ var Triumph = (function (exports) {
         return reward.group === group;
       });
 
-      if (!list) {
+      if (!list.length) {
         return null;
       }
 
@@ -531,7 +531,7 @@ var Triumph = (function (exports) {
         return reward.group === group;
       });
 
-      if (!list) {
+      if (!list.length) {
         return null;
       }
 
