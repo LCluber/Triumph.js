@@ -1,3 +1,7 @@
+Version 0.1.3 (April 16th 2019)
+-----------------------------
+ * Added amount parameter to Reward class in order to get the reward value.
+
 Version 0.1.2 (April 07th 2019)
 -----------------------------
  * Updated README.md with API reference

@@ -106,8 +106,8 @@ var Triumph = (function (exports) {
     };
 
     _proto.findLevel = function findLevel(name) {
-      for (var _i = 0, _LEVELS = LEVELS; _i < _LEVELS.length; _i++) {
-        var level = _LEVELS[_i];
+      for (var _i = 0; _i < LEVELS.length; _i++) {
+        var level = LEVELS[_i];
 
         if (level.name === name) {
           return level;
@@ -160,8 +160,8 @@ var Triumph = (function (exports) {
     };
 
     Logger.findLevel = function findLevel(name) {
-      for (var _i2 = 0, _LEVELS2 = LEVELS; _i2 < _LEVELS2.length; _i2++) {
-        var level = _LEVELS2[_i2];
+      for (var _i2 = 0; _i2 < LEVELS.length; _i2++) {
+        var level = LEVELS[_i2];
 
         if (level.name === name) {
           return level;
@@ -244,7 +244,7 @@ var Triumph = (function (exports) {
         }
       }
 
-      return false;
+      return null;
     };
 
     _proto.export = function _export(name) {
@@ -324,26 +324,9 @@ var Triumph = (function (exports) {
     };
 
     _proto.get = function get(name) {
-      for (var _iterator = this.list, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
-
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
-        }
-
-        var achievement = _ref;
-
-        if (achievement.name === name) {
-          return achievement;
-        }
-      }
-
-      return null;
+      return this.list.filter(function (achievement) {
+        return achievement.name === name;
+      }).shift();
     };
 
     _proto.length = function length() {
@@ -361,19 +344,19 @@ var Triumph = (function (exports) {
             lastMessage = this.test(achv, value, timestamp);
           }
         } else {
-          for (var _iterator2 = this.list, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-            var _ref2;
+          for (var _iterator = this.list, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+            var _ref;
 
-            if (_isArray2) {
-              if (_i2 >= _iterator2.length) break;
-              _ref2 = _iterator2[_i2++];
+            if (_isArray) {
+              if (_i >= _iterator.length) break;
+              _ref = _iterator[_i++];
             } else {
-              _i2 = _iterator2.next();
-              if (_i2.done) break;
-              _ref2 = _i2.value;
+              _i = _iterator.next();
+              if (_i.done) break;
+              _ref = _i.value;
             }
 
-            var _achv = _ref2;
+            var _achv = _ref;
             var msg = this.test(_achv, value, timestamp);
 
             if (msg) {
@@ -389,19 +372,19 @@ var Triumph = (function (exports) {
     _proto.export = function _export(name) {
       var achvs = [];
 
-      for (var _iterator3 = this.list, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
-        var _ref3;
+      for (var _iterator2 = this.list, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+        var _ref2;
 
-        if (_isArray3) {
-          if (_i3 >= _iterator3.length) break;
-          _ref3 = _iterator3[_i3++];
+        if (_isArray2) {
+          if (_i2 >= _iterator2.length) break;
+          _ref2 = _iterator2[_i2++];
         } else {
-          _i3 = _iterator3.next();
-          if (_i3.done) break;
-          _ref3 = _i3.value;
+          _i2 = _iterator2.next();
+          if (_i2.done) break;
+          _ref2 = _i2.value;
         }
 
-        var achv = _ref3;
+        var achv = _ref2;
         var exp = achv.export(name);
 
         if (exp) {
@@ -433,10 +416,12 @@ var Triumph = (function (exports) {
   var Reward =
   /*#__PURE__*/
   function () {
-    function Reward(name, title, description, image) {
+    function Reward(name, title, description, amount, group, image) {
       this.name = name;
       this.title = title;
       this.description = description;
+      this.amount = amount;
+      this.group = group;
       this.image = image;
       this.date = 0;
     }
@@ -468,9 +453,9 @@ var Triumph = (function (exports) {
 
     var _proto = Rewards.prototype;
 
-    _proto.add = function add(name, title, description, image) {
-      if (!this.get(name)) {
-        this.list.push(new Reward(name, title, description, image));
+    _proto.add = function add(name, title, description, amount, group, image) {
+      if (!this.getByName(name)) {
+        this.list.push(new Reward(name, title, description, amount, group, image));
         return true;
       }
 
@@ -478,7 +463,9 @@ var Triumph = (function (exports) {
       return false;
     };
 
-    _proto.get = function get(name) {
+    _proto.getByGroups = function getByGroups() {
+      var array = {};
+
       for (var _iterator = this.list, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
         var _ref;
 
@@ -493,12 +480,30 @@ var Triumph = (function (exports) {
 
         var reward = _ref;
 
-        if (reward.name === name) {
-          return reward;
+        if (!array.hasOwnProperty(reward.group)) {
+          array[reward.group] = [];
         }
+
+        array[reward.group].push(reward);
       }
 
-      return null;
+      return array;
+    };
+
+    _proto.getByName = function getByName(name) {
+      return this.list.filter(function (reward) {
+        return reward.name === name;
+      }).shift();
+    };
+
+    _proto.isActive = function isActive(name) {
+      var reward = this.getByName(name);
+
+      if (!reward) {
+        return null;
+      }
+
+      return reward.isActive() ? reward : null;
     };
 
     _proto.length = function length() {

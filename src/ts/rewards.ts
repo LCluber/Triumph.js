@@ -1,62 +1,73 @@
 import { Logger } from '@lcluber/mouettejs';
 import { Reward } from './reward';
-// import { Score } from './score';
+
+
+export interface Groups {
+  [key: string]: Reward[]
+}
 
 export class Rewards {
 
-  list: Array<Reward>;
-  // progress: number;
-  // score: Score;
+  list: Reward[];
 
-  constructor(  ) {
-
+  constructor( ) {
     this.list = [];
-    // this.progress = 0;
-    // this.score = new Score();
   }
 
   public add( name: string,
               title: String,
               description: string,
-              image: string //,
-              // relatedAchv: Achievement
+              amount: number,
+              group: string | null,
+              image: string
             ): boolean {
 
-    if (!this.get(name)) {
-      this.list.push(new Reward(name, title, description, image));
-      // this.score.total++;
+    if (!this.getByName(name)) {
+      this.list.push(new Reward( name, title, description, amount, group || name, image ));
       return true;
     }
     Logger.warn('Reward name already exists.');
     return false;
   }
 
-  public get(name: string): Reward|null {
+  public get(): Reward[] {
+    return this.list;
+  }
+
+  public getGrouped(): Groups | null {
+    let array: Groups = {};
     for (let reward of this.list) {
-      if (reward.name === name) {
-        return reward;
+      if (!array.hasOwnProperty(reward.group)){
+        array[reward.group] = [];
       }
+      array[reward.group].push(reward);
     }
-    return null;
+    return array;
+  }
+
+  public getByName(name: string): Reward | undefined {
+    return this.list.filter(reward => reward.name === name).shift();
+  }
+
+  public getByGroup(group: string): Reward | null {
+    let list = this.list.filter(reward => reward.group === group);
+    if (!list) {
+      return null
+    }
+    const reducer = (previousReward: Reward, currentReward: Reward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+    return list.reduce(reducer);
+  }
+
+  public isActive(name: string): Reward | null {
+    let reward = this.getByName(name);
+    if (!reward) {
+      return null;
+    }
+    return reward.isActive() ? reward : null ;
   }
 
   public length(): number {
     return this.list.length;
   }
-
-  // public activate(name: string, timestamp: number): boolean{
-  //   // if (this.progress < 100) {
-  //     if (name) {
-  //       let reward = this.get(name);
-  //       if (reward) {
-  //         if (reward.activate(timestamp)){
-  //           // this.progress = this.score.updateProgress();
-  //           return true;
-  //         };
-  //       }
-  //     }
-  //   // }
-  //   return false;
-  // }
 
 }

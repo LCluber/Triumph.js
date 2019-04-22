@@ -25,7 +25,7 @@
 
 
 export declare type Achv = {
-    message: string;
+    message: string | null;
     points: number;
 };
 export declare class Achievement {
@@ -37,10 +37,10 @@ export declare class Achievement {
     date: number;
     image: string;
     reward: Reward;
-    constructor(name: string, title: string, description: string, value: number, children: Achievements, image: string, reward: Reward);
+    constructor(name: string, title: string, description: string, value: number, children: Achievements | null, image: string, reward: Reward);
     isActive(): boolean;
     private activate;
-    try(value: number, timestamp: number): Achv | false;
+    try(value: number, timestamp: number): Achv | null;
     export(name: string): Array<Pick<Achievement, 'name' | 'value' | 'date'>> | false;
 }
 
@@ -50,14 +50,13 @@ export declare class Achievements {
     list: Array<Achievement>;
     progress: number;
     score: Score;
-    newAchv: boolean;
     constructor();
     add(name: string, title: string, description: string, value: number, children: Achievements | null, image: string, reward: Reward): boolean;
     getPoints(): number;
     getTotalPoints(): number;
-    get(name: string): Achievement | null;
+    get(name: string): Achievement | undefined;
     length(): number;
-    try(name: string, value: number, timestamp: number): string;
+    try(name: string | null, value: number, timestamp: number): string | null;
     export(name: string): Array<Pick<Achievement, 'name' | 'value' | 'date'>> | false;
     private test;
 }
@@ -65,24 +64,29 @@ export interface Level {
     id: number;
     name: string;
 }
-
 export declare class Reward {
     name: String;
     title: String;
     description: String;
-    relatedAchv: Achievement;
+    amount: number;
+    group: string;
     image: string;
     date: number;
-    constructor(name: String, title: String, description: string, image: string);
+    constructor(name: String, title: String, description: string, amount: number, group: string, image: string);
     isActive(): boolean;
     activate(timestamp: number): boolean;
 }
 
+export interface Groups {
+    [key: string]: Reward[];
+}
 export declare class Rewards {
-    list: Array<Reward>;
+    list: Reward[];
     constructor();
-    add(name: string, title: String, description: string, image: string): boolean;
-    get(name: string): Reward | null;
+    add(name: string, title: String, description: string, amount: number, group: string, image: string): boolean;
+    getByGroups(): Groups | null;
+    getByName(name: string): Reward | undefined;
+    isActive(name: string): Reward | null;
     length(): number;
 }
 export declare class Score {

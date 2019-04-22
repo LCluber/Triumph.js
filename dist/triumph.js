@@ -71,7 +71,7 @@ class Achievement {
                 };
             }
         }
-        return false;
+        return null;
     }
     export(name) {
         name = name ? name : this.name;
@@ -128,12 +128,7 @@ class Achievements {
         return this.score.total;
     }
     get(name) {
-        for (let achievement of this.list) {
-            if (achievement.name === name) {
-                return achievement;
-            }
-        }
-        return null;
+        return this.list.filter(achievement => achievement.name === name).shift();
     }
     length() {
         return this.list.length;
@@ -182,10 +177,12 @@ class Achievements {
 }
 
 class Reward {
-    constructor(name, title, description, image) {
+    constructor(name, title, description, amount, group, image) {
         this.name = name;
         this.title = title;
         this.description = description;
+        this.amount = amount;
+        this.group = group;
         this.image = image;
         this.date = 0;
     }
@@ -205,21 +202,33 @@ class Rewards {
     constructor() {
         this.list = [];
     }
-    add(name, title, description, image) {
-        if (!this.get(name)) {
-            this.list.push(new Reward(name, title, description, image));
+    add(name, title, description, amount, group, image) {
+        if (!this.getByName(name)) {
+            this.list.push(new Reward(name, title, description, amount, group, image));
             return true;
         }
         Logger.warn('Reward name already exists.');
         return false;
     }
-    get(name) {
+    getByGroups() {
+        let array = {};
         for (let reward of this.list) {
-            if (reward.name === name) {
-                return reward;
+            if (!array.hasOwnProperty(reward.group)) {
+                array[reward.group] = [];
             }
+            array[reward.group].push(reward);
         }
-        return null;
+        return array;
+    }
+    getByName(name) {
+        return this.list.filter(reward => reward.name === name).shift();
+    }
+    isActive(name) {
+        let reward = this.getByName(name);
+        if (!reward) {
+            return null;
+        }
+        return reward.isActive() ? reward : null;
     }
     length() {
         return this.list.length;

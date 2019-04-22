@@ -8,7 +8,7 @@ export class Achievements {
   list: Array<Achievement>;
   progress: number;
   score: Score;
-  newAchv: boolean;
+  // newAchv: boolean;
 
   constructor() {
 
@@ -46,30 +46,15 @@ export class Achievements {
     return this.score.total;
   }
 
-  public get(name: string): Achievement|null {
-    for (let achievement of this.list) {
-      if (achievement.name === name) {
-        return achievement;
-      }
-    }
-    return null;
+  public get(name: string): Achievement | undefined {
+    return this.list.filter(achievement => achievement.name === name).shift();
   }
 
   public length(): number {
     return this.list.length;
   }
 
-  // public getLatest(value: number): Achievement|false {
-  //   let achv = null;
-  //   for(let achievement of this.list) {
-  //     if (achievement.value <= value) {
-  //       achv = achievement;
-  //     }
-  //   }
-  //   return achv ? achv : false;
-  // }
-
-  public try(name: string, value: number, timestamp: number): string {
+  public try(name: string|null, value: number, timestamp: number): string | null {
     let lastMessage = null;
     if (this.progress < 100) {
       if (name) {
@@ -103,7 +88,7 @@ export class Achievements {
     return false;
   }
 
-  private test(achievement: Achievement, value: number, timestamp: number): string {
+  private test(achievement: Achievement, value: number, timestamp: number): string | null {
     let achv = achievement.try(value, timestamp);
     if (achv && achv.points) {
       this.progress = this.score.updateProgress(achv.points);

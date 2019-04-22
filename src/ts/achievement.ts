@@ -1,9 +1,9 @@
-import { Logger } from '@lcluber/mouettejs';
+// import { Logger } from '@lcluber/mouettejs';
 import { Achievements } from './triumph';
 import { Reward } from './reward';
 
 export type Achv = {
-  message: string;
+  message: string | null;
   points: number;
 };
 
@@ -22,7 +22,7 @@ export class Achievement {
     title: string,
     description: string,
     value: number,
-    children: Achievements,
+    children: Achievements | null,
     image: string,
     reward: Reward) {
 
@@ -49,7 +49,7 @@ export class Achievement {
   }
 
   //returns the quantity of new points earned and the message
-  public try(value: number, timestamp: number): Achv|false {
+  public try(value: number, timestamp: number): Achv|null {
     if (!this.isActive()) { //not earned yet
       if (this.children.length()) { //has children
         let childrenPoints = this.children.score.points;
@@ -72,7 +72,7 @@ export class Achievement {
         };
       }
     }
-    return false;
+    return null;
   }
 
   public export(name: string): Array<Pick<Achievement, 'name' | 'value' | 'date'>> | false {

@@ -1,19 +1,22 @@
-import { Achievement } from './achievement';
+
 
 export class Reward {
 
   name: String;
   title: String;
   description: String;
-  relatedAchv: Achievement;
+  amount: number;
+  group: string;
   image: string;
   date: number;
 
-  constructor( name: String, title: String, description: string, image: string ) {
+  constructor( name: String, title: String, description: string, amount:number, group: string, image: string/*, level: number*/ ) {
 
     this.name = name;
     this.title = title;
     this.description = description;
+    this.amount = amount;
+    this.group = group;
     this.image = image;
     this.date = 0;
   }
