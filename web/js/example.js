@@ -25,5 +25,5 @@ console.log(ACHIEVEMENTS.try("svv", 2, null));
 // console.log(ACHIEVEMENTS);
 // console.log(REWARDS);
 
-console.log(REWARDS.getByGroup('dbg'));
-console.log(REWARDS.getGrouped());
+console.log('getByGroup', REWARDS.getByGroup('dbg'));
+console.log('getGrouped', REWARDS.getGrouped());

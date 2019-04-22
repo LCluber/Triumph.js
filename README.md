@@ -36,14 +36,14 @@ ACHIEVEMENTS = new Achievements();
 let subAchv = new Achievements();
 subAchv.add( "a", "Score novice", "Score 1 000 000 points", 1000000, null, 'crown', null);
 subAchv.add( "b", "Score hobbyist", "Score 10 000 000 points", 10000000, null, 'crown', null);
-subAchv.add( "c", "Score adventurer", "Score 20 000 000 points", 20000000, null, 'crown', REWARDS.get('emp'));
+subAchv.add( "c", "Score adventurer", "Score 20 000 000 points", 20000000, null, 'crown', REWARDS.getByName('emp'));
 
 ACHIEVEMENTS.add("pgm", "PGM", "Make high scores", 0, subAchv, 'crown', null);
 
 let subAchv2 = new Achievements();
 subAchv2.add( "a", "Survivor novice", "Survive 1 minute", 1, null, 'heartbeat', null);
 subAchv2.add( "b", "Survivor hobbyist", "Survive 2 minutes", 2, null, 'heartbeat', null);
-subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbeat', REWARDS.get('dbg');
+subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbeat', REWARDS.getByName('dbg');
 
 ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 'heartbeat', null);
 
@@ -52,7 +52,7 @@ ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achie
 let msg = ACHIEVEMENTS.try("svv", 3, null); // Test achievement "svv" with the value "3" and return the title of the biggest level earned with this value.
 
 // Check if reward is earned
-let reward = REWARDS.get('dbg').isActive();
+let reward = REWARDS.getByName('dbg').isActive();
 
 // Export flat array for easy persistence
 let userAchvs = ACHIEVEMENTS.export();
@@ -82,14 +82,14 @@ ACHIEVEMENTS = new Triumph.Achievements();
 var subAchv = new Triumph.Achievements();
 subAchv.add( "a", "Score novice", "Score 1 000 000 points", 1000000, null, 'crown', null);
 subAchv.add( "b", "Score hobbyist", "Score 10 000 000 points", 10000000, null, 'crown', null);
-subAchv.add( "c", "Score adventurer", "Score 20 000 000 points", 20000000, null, 'crown', REWARDS.get('emp'));
+subAchv.add( "c", "Score adventurer", "Score 20 000 000 points", 20000000, null, 'crown', REWARDS.getByName('emp'));
 
 ACHIEVEMENTS.add("pgm", "PGM", "Make high scores", 0, subAchv, 'crown', null);
 
 var subAchv2 = new Triumph.Achievements();
 subAchv2.add( "a", "Survivor novice", "Survive 1 minute", 1, null, 'heartbeat', null);
 subAchv2.add( "b", "Survivor hobbyist", "Survive 2 minutes", 2, null, 'heartbeat', null);
-subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbeat', REWARDS.get('dbg');
+subAchv2.add( "c", "Survivor adventurer", "Survive 3 minutes", 3, null, 'heartbeat', REWARDS.getByName('dbg');
 
 ACHIEVEMENTS.add("svv", "Immortal", "Survive as long as possible", 0, subAchv2, 'heartbeat', null);
 
@@ -98,7 +98,7 @@ ACHIEVEMENTS.try("svv", 1, 1549104204008); // Activate a previously earned achie
 var msg = ACHIEVEMENTS.try("svv", 3, null); // Test achievement "svv" with the value "3" and return the title of the biggest level earned with this value.
 
 // Check if reward is earned
-var reward = REWARDS.get('dbg').isActive();
+var reward = REWARDS.getByName('dbg').isActive();
 
 // Export flat array for easy persistence
 var userAchvs = ACHIEVEMENTS.export();
@@ -135,11 +135,16 @@ Achievements.getTotalPoints(): number {}
 Achievements.length(): number {}
 
 Rewards.add(  name: string,
-              title: String,
+              title: string,
               description: string,
+              group: string
               image: string
             ): boolean {}
-Rewards.get(name: string): Reward | null {}
+Rewards.get(): Reward[] {}
+Rewards.getByName(name: string): Reward | undefined {}
+Rewards.getByGroup(group: string): Reward | null {}
+Rewards.isRewardActive(name: string): Reward | null {}
+Rewards.isGroupActive(group: string): Reward | null {}
 Rewards.length(): number {}
 ```
 

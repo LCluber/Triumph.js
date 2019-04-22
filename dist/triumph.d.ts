@@ -83,10 +83,13 @@ export interface Groups {
 export declare class Rewards {
     list: Reward[];
     constructor();
-    add(name: string, title: String, description: string, amount: number, group: string, image: string): boolean;
-    getByGroups(): Groups | null;
+    add(name: string, title: String, description: string, amount: number, group: string | null, image: string): boolean;
+    get(): Reward[];
+    getGroups(): Groups | null;
     getByName(name: string): Reward | undefined;
-    isActive(name: string): Reward | null;
+    getByGroup(group: string): Reward | null;
+    isRewardActive(name: string): Reward | null;
+    isGroupActive(group: string): Reward | null;
     length(): number;
 }
 export declare class Score {

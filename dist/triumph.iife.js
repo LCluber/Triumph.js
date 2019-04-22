@@ -455,7 +455,7 @@ var Triumph = (function (exports) {
 
     _proto.add = function add(name, title, description, amount, group, image) {
       if (!this.getByName(name)) {
-        this.list.push(new Reward(name, title, description, amount, group, image));
+        this.list.push(new Reward(name, title, description, amount, group || name, image));
         return true;
       }
 
@@ -463,7 +463,11 @@ var Triumph = (function (exports) {
       return false;
     };
 
-    _proto.getByGroups = function getByGroups() {
+    _proto.get = function get() {
+      return this.list;
+    };
+
+    _proto.getGroups = function getGroups() {
       var array = {};
 
       for (var _iterator = this.list, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -496,13 +500,46 @@ var Triumph = (function (exports) {
       }).shift();
     };
 
-    _proto.isActive = function isActive(name) {
+    _proto.getByGroup = function getByGroup(group) {
+      var list = this.list.filter(function (reward) {
+        return reward.group === group;
+      });
+
+      if (!list) {
+        return null;
+      }
+
+      var reducer = function reducer(previousReward, currentReward) {
+        return currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+      };
+
+      return list.reduce(reducer);
+    };
+
+    _proto.isRewardActive = function isRewardActive(name) {
       var reward = this.getByName(name);
 
       if (!reward) {
         return null;
       }
 
+      return reward.isActive() ? reward : null;
+    };
+
+    _proto.isGroupActive = function isGroupActive(group) {
+      var list = this.list.filter(function (reward) {
+        return reward.group === group;
+      });
+
+      if (!list) {
+        return null;
+      }
+
+      var reducer = function reducer(previousReward, currentReward) {
+        return currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+      };
+
+      var reward = list.reduce(reducer);
       return reward.isActive() ? reward : null;
     };
 

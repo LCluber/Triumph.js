@@ -34,7 +34,7 @@ export class Rewards {
     return this.list;
   }
 
-  public getGrouped(): Groups | null {
+  public getGroups(): Groups | null {
     let array: Groups = {};
     for (let reward of this.list) {
       if (!array.hasOwnProperty(reward.group)){
@@ -52,17 +52,27 @@ export class Rewards {
   public getByGroup(group: string): Reward | null {
     let list = this.list.filter(reward => reward.group === group);
     if (!list) {
-      return null
+      return null;
     }
     const reducer = (previousReward: Reward, currentReward: Reward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
     return list.reduce(reducer);
   }
 
-  public isActive(name: string): Reward | null {
+  public isRewardActive(name: string): Reward | null {
     let reward = this.getByName(name);
     if (!reward) {
       return null;
     }
+    return reward.isActive() ? reward : null ;
+  }
+
+  public isGroupActive(group: string): Reward | null {
+    let list = this.list.filter(reward => reward.group === group);
+    if (!list) {
+      return null;
+    }
+    const reducer = (previousReward: Reward, currentReward: Reward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+    let reward = list.reduce(reducer);
     return reward.isActive() ? reward : null ;
   }
 

@@ -204,13 +204,16 @@ class Rewards {
     }
     add(name, title, description, amount, group, image) {
         if (!this.getByName(name)) {
-            this.list.push(new Reward(name, title, description, amount, group, image));
+            this.list.push(new Reward(name, title, description, amount, group || name, image));
             return true;
         }
         Logger.warn('Reward name already exists.');
         return false;
     }
-    getByGroups() {
+    get() {
+        return this.list;
+    }
+    getGroups() {
         let array = {};
         for (let reward of this.list) {
             if (!array.hasOwnProperty(reward.group)) {
@@ -223,11 +226,28 @@ class Rewards {
     getByName(name) {
         return this.list.filter(reward => reward.name === name).shift();
     }
-    isActive(name) {
+    getByGroup(group) {
+        let list = this.list.filter(reward => reward.group === group);
+        if (!list) {
+            return null;
+        }
+        const reducer = (previousReward, currentReward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+        return list.reduce(reducer);
+    }
+    isRewardActive(name) {
         let reward = this.getByName(name);
         if (!reward) {
             return null;
         }
+        return reward.isActive() ? reward : null;
+    }
+    isGroupActive(group) {
+        let list = this.list.filter(reward => reward.group === group);
+        if (!list) {
+            return null;
+        }
+        const reducer = (previousReward, currentReward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+        let reward = list.reduce(reducer);
         return reward.isActive() ? reward : null;
     }
     length() {
