@@ -1,8 +1,8 @@
-Version 0.1.4 (April 23th 2019)
+Version 0.1.4 (April 23rd 2019)
 -----------------------------
  * Fixed getByGroup() and isGroupActive() methods in Rewards class
 
-Version 0.1.3 (April 22th 2019)
+Version 0.1.3 (April 22nd 2019)
 -----------------------------
  * Added booster levels
  * Added amount parameter to Reward class in order to get the reward value.
