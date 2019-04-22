@@ -86,14 +86,14 @@ ACHIEVEMENTS = <span class="hljs-keyword">new</span> Achievements();
 <span class="hljs-keyword">let</span> subAchv = <span class="hljs-keyword">new</span> Achievements();
 subAchv.add( <span class="hljs-string">"a"</span>, <span class="hljs-string">"Score novice"</span>, <span class="hljs-string">"Score 1 000 000 points"</span>, <span class="hljs-number">1000000</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'crown'</span>, <span class="hljs-literal">null</span>);
 subAchv.add( <span class="hljs-string">"b"</span>, <span class="hljs-string">"Score hobbyist"</span>, <span class="hljs-string">"Score 10 000 000 points"</span>, <span class="hljs-number">10000000</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'crown'</span>, <span class="hljs-literal">null</span>);
-subAchv.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"Score adventurer"</span>, <span class="hljs-string">"Score 20 000 000 points"</span>, <span class="hljs-number">20000000</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'crown'</span>, REWARDS.get(<span class="hljs-string">'emp'</span>));
+subAchv.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"Score adventurer"</span>, <span class="hljs-string">"Score 20 000 000 points"</span>, <span class="hljs-number">20000000</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'crown'</span>, REWARDS.getByName(<span class="hljs-string">'emp'</span>));
 
 ACHIEVEMENTS.add(<span class="hljs-string">"pgm"</span>, <span class="hljs-string">"PGM"</span>, <span class="hljs-string">"Make high scores"</span>, <span class="hljs-number">0</span>, subAchv, <span class="hljs-string">'crown'</span>, <span class="hljs-literal">null</span>);
 
 <span class="hljs-keyword">let</span> subAchv2 = <span class="hljs-keyword">new</span> Achievements();
 subAchv2.add( <span class="hljs-string">"a"</span>, <span class="hljs-string">"Survivor novice"</span>, <span class="hljs-string">"Survive 1 minute"</span>, <span class="hljs-number">1</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'heartbeat'</span>, <span class="hljs-literal">null</span>);
 subAchv2.add( <span class="hljs-string">"b"</span>, <span class="hljs-string">"Survivor hobbyist"</span>, <span class="hljs-string">"Survive 2 minutes"</span>, <span class="hljs-number">2</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'heartbeat'</span>, <span class="hljs-literal">null</span>);
-subAchv2.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"Survivor adventurer"</span>, <span class="hljs-string">"Survive 3 minutes"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'heartbeat'</span>, REWARDS.get(<span class="hljs-string">'dbg'</span>);
+subAchv2.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"Survivor adventurer"</span>, <span class="hljs-string">"Survive 3 minutes"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'heartbeat'</span>, REWARDS.getByName(<span class="hljs-string">'dbg'</span>);
 
 ACHIEVEMENTS.add(<span class="hljs-string">"svv"</span>, <span class="hljs-string">"Immortal"</span>, <span class="hljs-string">"Survive as long as possible"</span>, <span class="hljs-number">0</span>, subAchv2, <span class="hljs-string">'heartbeat'</span>, <span class="hljs-literal">null</span>);
 
@@ -102,7 +102,7 @@ ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-numbe
 <span class="hljs-keyword">let</span> msg = ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>); <span class="hljs-comment">// Test achievement "svv" with the value "3" and return the title of the biggest level earned with this value.</span>
 
 <span class="hljs-comment">// Check if reward is earned</span>
-<span class="hljs-keyword">let</span> reward = REWARDS.get(<span class="hljs-string">'dbg'</span>).isActive();
+<span class="hljs-keyword">let</span> reward = REWARDS.getByName(<span class="hljs-string">'dbg'</span>).isActive();
 
 <span class="hljs-comment">// Export flat array for easy persistence</span>
 <span class="hljs-keyword">let</span> userAchvs = ACHIEVEMENTS.export();
@@ -125,14 +125,14 @@ ACHIEVEMENTS = <span class="hljs-keyword">new</span> Triumph.Achievements();
 <span class="hljs-keyword">var</span> subAchv = <span class="hljs-keyword">new</span> Triumph.Achievements();
 subAchv.add( <span class="hljs-string">"a"</span>, <span class="hljs-string">"Score novice"</span>, <span class="hljs-string">"Score 1 000 000 points"</span>, <span class="hljs-number">1000000</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'crown'</span>, <span class="hljs-literal">null</span>);
 subAchv.add( <span class="hljs-string">"b"</span>, <span class="hljs-string">"Score hobbyist"</span>, <span class="hljs-string">"Score 10 000 000 points"</span>, <span class="hljs-number">10000000</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'crown'</span>, <span class="hljs-literal">null</span>);
-subAchv.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"Score adventurer"</span>, <span class="hljs-string">"Score 20 000 000 points"</span>, <span class="hljs-number">20000000</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'crown'</span>, REWARDS.get(<span class="hljs-string">'emp'</span>));
+subAchv.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"Score adventurer"</span>, <span class="hljs-string">"Score 20 000 000 points"</span>, <span class="hljs-number">20000000</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'crown'</span>, REWARDS.getByName(<span class="hljs-string">'emp'</span>));
 
 ACHIEVEMENTS.add(<span class="hljs-string">"pgm"</span>, <span class="hljs-string">"PGM"</span>, <span class="hljs-string">"Make high scores"</span>, <span class="hljs-number">0</span>, subAchv, <span class="hljs-string">'crown'</span>, <span class="hljs-literal">null</span>);
 
 <span class="hljs-keyword">var</span> subAchv2 = <span class="hljs-keyword">new</span> Triumph.Achievements();
 subAchv2.add( <span class="hljs-string">"a"</span>, <span class="hljs-string">"Survivor novice"</span>, <span class="hljs-string">"Survive 1 minute"</span>, <span class="hljs-number">1</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'heartbeat'</span>, <span class="hljs-literal">null</span>);
 subAchv2.add( <span class="hljs-string">"b"</span>, <span class="hljs-string">"Survivor hobbyist"</span>, <span class="hljs-string">"Survive 2 minutes"</span>, <span class="hljs-number">2</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'heartbeat'</span>, <span class="hljs-literal">null</span>);
-subAchv2.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"Survivor adventurer"</span>, <span class="hljs-string">"Survive 3 minutes"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'heartbeat'</span>, REWARDS.get(<span class="hljs-string">'dbg'</span>);
+subAchv2.add( <span class="hljs-string">"c"</span>, <span class="hljs-string">"Survivor adventurer"</span>, <span class="hljs-string">"Survive 3 minutes"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'heartbeat'</span>, REWARDS.getByName(<span class="hljs-string">'dbg'</span>);
 
 ACHIEVEMENTS.add(<span class="hljs-string">"svv"</span>, <span class="hljs-string">"Immortal"</span>, <span class="hljs-string">"Survive as long as possible"</span>, <span class="hljs-number">0</span>, subAchv2, <span class="hljs-string">'heartbeat'</span>, <span class="hljs-literal">null</span>);
 
@@ -141,7 +141,7 @@ ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-numbe
 <span class="hljs-keyword">var</span> msg = ACHIEVEMENTS.try(<span class="hljs-string">"svv"</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">null</span>); <span class="hljs-comment">// Test achievement "svv" with the value "3" and return the title of the biggest level earned with this value.</span>
 
 <span class="hljs-comment">// Check if reward is earned</span>
-<span class="hljs-keyword">var</span> reward = REWARDS.get(<span class="hljs-string">'dbg'</span>).isActive();
+<span class="hljs-keyword">var</span> reward = REWARDS.getByName(<span class="hljs-string">'dbg'</span>).isActive();
 
 <span class="hljs-comment">// Export flat array for easy persistence</span>
 <span class="hljs-keyword">var</span> userAchvs = ACHIEVEMENTS.export();
@@ -172,11 +172,16 @@ Achievements.getTotalPoints(): number {}
 Achievements.length(): number {}
 
 Rewards.add(  name: string,
-              <span class="hljs-attr">title</span>: <span class="hljs-built_in">String</span>,
+              <span class="hljs-attr">title</span>: string,
               <span class="hljs-attr">description</span>: string,
-              <span class="hljs-attr">image</span>: string
+              <span class="hljs-attr">group</span>: string
+              image: string
             ): boolean {}
-Rewards.get(name: string): Reward | <span class="hljs-literal">null</span> {}
+Rewards.get(): Reward[] {}
+Rewards.getByName(name: string): Reward | <span class="hljs-literal">undefined</span> {}
+Rewards.getByGroup(group: string): Reward | <span class="hljs-literal">null</span> {}
+Rewards.isRewardActive(name: string): Reward | <span class="hljs-literal">null</span> {}
+Rewards.isGroupActive(group: string): Reward | <span class="hljs-literal">null</span> {}
 Rewards.length(): number {}</code></pre>
 				<h2 id="tests">Tests</h2>
 				<p>No tests to run yet</p>
