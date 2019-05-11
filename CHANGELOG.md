@@ -1,6 +1,6 @@
 Version 0.1.5 (May 11rd 2019)
 -----------------------------
- * Fixed getByGroup() and isGroupActive() methods in Rewards class
+ * Better getByGroup() and isGroupActive() methods in Rewards class
 
 Version 0.1.4 (April 23rd 2019)
 -----------------------------
