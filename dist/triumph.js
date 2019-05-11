@@ -231,7 +231,7 @@ class Rewards {
         if (!list.length) {
             return null;
         }
-        const reducer = (previousReward, currentReward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+        const reducer = (previousReward, currentReward) => currentReward.date ? currentReward : previousReward;
         return list.reduce(reducer);
     }
     isRewardActive(name) {
@@ -246,7 +246,7 @@ class Rewards {
         if (!list.length) {
             return null;
         }
-        const reducer = (previousReward, currentReward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+        const reducer = (previousReward, currentReward) => currentReward.date ? currentReward : previousReward;
         let reward = list.reduce(reducer);
         return reward.isActive() ? reward : null;
     }

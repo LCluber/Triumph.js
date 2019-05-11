@@ -71,7 +71,7 @@ export class Rewards {
     if (!list.length) {
       return null;
     }
-    const reducer = (previousReward: Reward, currentReward: Reward) => currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+    const reducer = (previousReward: Reward, currentReward: Reward) => currentReward.date /*&& currentReward.amount > previousReward.amount*/ ? currentReward : previousReward;
     let reward = list.reduce(reducer);
     return reward.isActive() ? reward : null ;
   }

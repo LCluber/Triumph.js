@@ -510,7 +510,7 @@ var Triumph = (function (exports) {
       }
 
       var reducer = function reducer(previousReward, currentReward) {
-        return currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+        return currentReward.date ? currentReward : previousReward;
       };
 
       return list.reduce(reducer);
@@ -536,7 +536,7 @@ var Triumph = (function (exports) {
       }
 
       var reducer = function reducer(previousReward, currentReward) {
-        return currentReward.date && currentReward.amount > previousReward.amount ? currentReward : previousReward;
+        return currentReward.date ? currentReward : previousReward;
       };
 
       var reward = list.reduce(reducer);
